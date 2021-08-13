@@ -43,4 +43,4 @@
 
 </div>
 <div class="mainSectionContainer">
-   <div class="mainContantContainer">
+   <div class="mainContentContainer">
