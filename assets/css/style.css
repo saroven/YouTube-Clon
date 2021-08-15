@@ -4,8 +4,8 @@ body {
   padding: 0;
   margin: 0;
 }
-a{
-	text-decoration: none;
+a {
+  text-decoration: none;
 }
 
 .pageContainer {
@@ -46,41 +46,41 @@ a{
   height: 25px;
   margin-left: 8px;
 }
-.mastHeadContainer .searchBarContainer{
-	margin: 0 40px;
-	flex: 1;
-	display: flex;
+.mastHeadContainer .searchBarContainer {
+  margin: 0 40px;
+  flex: 1;
+  display: flex;
 }
-.mastHeadContainer .searchBarContainer form{
-	flex: 1;
-	display: flex;
+.mastHeadContainer .searchBarContainer form {
+  flex: 1;
+  display: flex;
 }
-.mastHeadContainer .searchBarContainer .searchBar{
-	flex: 1;
-	max-width: 600px;
-	color: #111;
-	padding: 2px 6px;
-	font-size: 14px;
-	font-weight: 100;
-	border: 1px solid #ccc;
-	border-top-left-radius: 2px;
-	border-bottom-left-radius: 2px;
-	border-right: none;
-	height: 32px;
-	box-shadow: #eee 0px 1px 2px 0px inset;
+.mastHeadContainer .searchBarContainer .searchBar {
+  flex: 1;
+  max-width: 600px;
+  color: #111;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-weight: 100;
+  border: 1px solid #ccc;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-right: none;
+  height: 32px;
+  box-shadow: #eee 0px 1px 2px 0px inset;
 }
-.mastHeadContainer .searchBarContainer .searchBtn{
-	height: 32px;
-	background-color: #f8f8f8;
-	border: 1px solid #d3d3d3;
-	border-bottom-right-radius: 2px;
-	border-top-left-radius: 2px;
-	cursor: pointer;
-	width: 65px;
+.mastHeadContainer .searchBarContainer .searchBtn {
+  height: 32px;
+  background-color: #f8f8f8;
+  border: 1px solid #d3d3d3;
+  border-bottom-right-radius: 2px;
+  border-top-left-radius: 2px;
+  cursor: pointer;
+  width: 65px;
 }
-.mastHeadContainer .searchBarContainer .searchBtn img{
-	height: 20px;
-	width: 20px;
+.mastHeadContainer .searchBarContainer .searchBtn img {
+  height: 20px;
+  width: 20px;
 }
 .sideNavContainer {
   width: 240px;
@@ -101,4 +101,14 @@ a{
 }
 .mainContentContainer {
   padding: 10px 30px;
+  display: flex;
+  flex: 1;
 }
+.column {
+  flex: 1;
+  background-color: #fff;
+  min-height: 300px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
+}
+
