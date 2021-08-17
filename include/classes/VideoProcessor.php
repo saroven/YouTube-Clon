@@ -34,6 +34,10 @@ class VideoProcessor
                 echo "Converting failed\n";
                 return false;
             }
+            if (!$this->deleteFile($tempFilePath)){
+                echo "Converting failed\n";
+                return false;
+            }
         }
     }
     private function processData($data, $filePath)
@@ -90,6 +94,15 @@ class VideoProcessor
             foreach ($outputLog as $line){
                 echo $line . "<br>";
             }
+            return false;
+        }
+        return true;
+    }
+
+    private function deleteFile($filePath)
+    {
+        if (!unlink($filePath)){
+            echo "Could not deleted file.\n";
             return false;
         }
         return true;
