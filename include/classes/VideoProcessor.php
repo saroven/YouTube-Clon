@@ -44,6 +44,7 @@ class VideoProcessor
                 echo "Thumbnail generation failed\n";
                 return false;
             }
+            return true;
         }
     }
     private function processData($data, $filePath)
@@ -121,11 +122,33 @@ class VideoProcessor
         $pathToThumbnails = "uploads/videos/thumbnails";
         $duration = $this->videoDuration($filePath);
         $videoId = $this->conn->LastInsertId();
-        if (!$this->updateVideoDuration($duration, $videoId)){
-            return false;
-        }else{
-            return true;
+        $this->updateVideoDuration($duration, $videoId);
+        for ($num = 1; $num <= $numbThumbnails; $num++){
+             $imageName = uniqid(). ".jpg";
+             $inerval = ($duration * 0.8) / $numbThumbnails * $num;
+             $fullThumbnailPath = "$pathToThumbnails/$videoId-$imageName";
+
+            $cmd = escapeshellcmd($this->ffmpegPath)." -i $filePath -ss $inerval -s $thumbnailSize -vframes 1 $fullThumbnailPath 2>&1";
+            $outputLog = array();
+            exec($cmd, $outputLog, $returnCode);
+            if ($returnCode != 0){
+                //command failed
+                foreach ($outputLog as $line){
+                    echo $line . "<br>";
+                }
+            }
+            $selected = $num == 1 ? 1 : 0;
+            $query = $this->conn->prepare("INSERT INTO thumbnails(videoid, filePath, selected) VALUES (:videoId, :filePath, :selected)");
+            $query->bindParam(":videoId", $videoId);
+            $query->bindParam(":filePath", $fullThumbnailPath);
+            $query->bindParam(":selected", $selected);
+            $success = $query->execute();
+            if (!$success){
+                echo "Error inserting thumbnails \n";
+                return false;
+            }
         }
+        return true;
 
     }
     private function videoDuration($filePath)
@@ -137,7 +160,7 @@ class VideoProcessor
     {
         $duration = (int)$duration;
         $hour = floor($duration / 3600);
-        $mins = floor($duration - ($hour * 3600) / 60);
+        $mins = floor(($duration - ($hour * 3600) / 60);
         $secs  = floor($duration % 60);
 
         $hour = ($hour < 1) ? "" : $hour . "";
