@@ -14,3 +14,7 @@ $videoProcessor = new VideoProcessor($conn);
 $wasSuccessull = $videoProcessor->upload($videoUploadData);
 //3) Check if upload successful
 
+if ($wasSuccessull){
+    echo "Upload Successful";
+}
+
