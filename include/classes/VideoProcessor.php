@@ -120,13 +120,39 @@ class VideoProcessor
         $numbThumbnails = 3;
         $pathToThumbnails = "uploads/videos/thumbnails";
         $duration = $this->videoDuration($filePath);
-        echo "Duration: $duration";
-        return true;
+        $videoId = $this->conn->LastInsertId();
+        if (!$this->updateVideoDuration($duration, $videoId)){
+            return false;
+        }else{
+            return true;
+        }
+
     }
     private function videoDuration($filePath)
     {
         $ffprobe = escapeshellcmd($this->ffprobePath);
         return shell_exec("$ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 $filePath");
+    }
+    private function updateVideoDuration($duration, $videoId)
+    {
+        $duration = (int)$duration;
+        $hour = floor($duration / 3600);
+        $mins = floor($duration - ($hour * 3600) / 60);
+        $secs  = floor($duration % 60);
+
+        $hour = ($hour < 1) ? "" : $hour . "";
+        $mins = ($mins < 10) ? "0".$mins.":" : $mins . ":";
+        $secs = ($secs < 10) ? "0".$secs : $secs;
+        $duration = $hour.$mins.$secs;
+        $query  = $this->conn->prepare("UPDATE videos SET duration=:duration WHERE id=:videoId");
+        $query->bindParam(":duration", $duration);
+        $query->bindParam(":videoId", $videoId);
+        if (!$query->execute()){
+            return false;
+        }else{
+            return true;
+        }
+
     }
 
 }
