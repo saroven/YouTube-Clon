@@ -160,7 +160,7 @@ class VideoProcessor
     {
         $duration = (int)$duration;
         $hour = floor($duration / 3600);
-        $mins = floor(($duration - ($hour * 3600) / 60);
+        $mins = floor(($duration - ($hour * 3600)) / 60);
         $secs  = floor($duration % 60);
 
         $hour = ($hour < 1) ? "" : $hour . "";
