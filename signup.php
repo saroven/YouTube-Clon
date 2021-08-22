@@ -19,17 +19,14 @@ if (isset($_POST['submit'])){
     if($isSuccessful){
         //success
         //redirect to index page
-        echo "Success";
+        $_SESSION['username'] = $username;
+        header('location: index.php');
     }else{
-        echo "Faild";
+        echo "Failed";
     }
 
 }
-function getValue($name){
-    if (isset($_POST[$name])){
-        echo $_POST[$name];
-    }
-}
+
 ?>
 
 <!DOCTYPE html>

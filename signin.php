@@ -1,3 +1,12 @@
+<?php
+require 'include/config.php';
+function getValue($name){
+    if (isset($_POST[$name])){
+        echo $_POST[$name];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +31,7 @@
         </div>
         <div class="signInForm">
             <form action="signin.php" method="post">
-                <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+                <input type="text" name="username" placeholder="Username" value="<?php getValue('username'); ?>" autocomplete="off" required>
                 <input type="password" name="pass" placeholder="Password" autocomplete="off" required>
                 <input type="submit" name="submit" value="SUBMIT">
             </form>

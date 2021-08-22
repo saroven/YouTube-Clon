@@ -1,5 +1,10 @@
+<?php require 'include/header.php'; ?>
+
 <?php
-require 'include/header.php';
+  if (isset($_SESSION['username'])){
+      echo "Logged in as: ".$_SESSION['username'];
+  }else{
+      echo "Not logged in.";
+  }
 ?>
-      hello everyone
 <?php require 'include/footer.php'; ?>
