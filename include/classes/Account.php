@@ -16,6 +16,26 @@ class Account
         $this->validateUsername($un);
         $this->validateEmail($em);
         $this->validatePassword($ps, $ps2);
+
+        if(empty($this->errors)){
+            return $this->insertUserData($fn, $ln, $un, $em, $ps);
+        }else{
+            return false;
+        }
+    }
+    public function insertUserData($fn, $ln, $un, $em, $ps){
+        $ps = hash('sha512', $ps);
+        $pp = 'assets/images/profilePictures/default.png';
+        $query = $this->conn->prepare("INSERT INTO users (fname, lname, email, username, password,profilePic) 
+                                        VALUES (:fn, :ln, :em, :un, :ps, :pp)");
+        $query->bindParam(':fn', $fn);
+        $query->bindParam(':ln', $ln);
+        $query->bindParam(':em', $em);
+        $query->bindParam(':un', $un);
+        $query->bindParam(':ps', $ps);
+        $query->bindParam(':pp', $pp);
+
+        return $query->execute();
     }
 
     private function validateFirstName($name)

@@ -15,7 +15,20 @@ if (isset($_POST['submit'])){
     $pass = FormValidation::sanitizeFormPassword($_POST['pass']);
     $cpass = FormValidation::sanitizeFormPassword($_POST['cpass']);
 
-    $account->register($fname, $lname, $username, $email, $pass, $cpass);
+    $isSuccessful = $account->register($fname, $lname, $username, $email, $pass, $cpass);
+    if($isSuccessful){
+        //success
+        //redirect to index page
+        echo "Success";
+    }else{
+        echo "Faild";
+    }
+
+}
+function getValue($name){
+    if (isset($_POST[$name])){
+        echo $_POST[$name];
+    }
 }
 ?>
 
@@ -45,18 +58,18 @@ if (isset($_POST['submit'])){
             <form action="signup.php" method="post">
 
                 <?php echo $account->getError(Constants::$firstNameCharacters)?>
-                <input type="text" name="fname" placeholder="First Name" autocomplete="off" required>
+                <input type="text" name="fname" placeholder="First Name" value="<?php getValue('fname'); ?>" autocomplete="off" required>
 
                 <?php echo $account->getError(Constants::$lastNameCharacters)?>
-                <input type="text" name="lname" placeholder="Last Name" autocomplete="off" required>
+                <input type="text" name="lname" placeholder="Last Name" value="<?php getValue('lname'); ?>" autocomplete="off" required>
 
                 <?php echo $account->getError(Constants::$usernameTaken)?>
                 <?php echo $account->getError(Constants::$usernameCharacters)?>
-                <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+                <input type="text" name="username" placeholder="Username" value="<?php getValue('username'); ?>" autocomplete="off" required>
 
                 <?php echo $account->getError(Constants::$invalidEmail)?>
                 <?php echo $account->getError(Constants::$emailTaken)?>
-                <input type="email" name="email" placeholder="Email" autocomplete="off" required>
+                <input type="email" name="email" placeholder="Email" value="<?php getValue('email'); ?>" autocomplete="off" required>
 
                 <input type="password" name="pass" placeholder="Password" autocomplete="off" required>
                 <?php echo $account->getError(Constants::$passwordNotMatch)?>
