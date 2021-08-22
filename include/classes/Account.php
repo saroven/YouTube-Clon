@@ -8,7 +8,20 @@ class Account
     {
         $this->conn = $conn;
     }
+    public function login($un, $ps){
+        $ps = hash('sha512', $ps);
+        $query = $this->conn->prepare("SELECT * FROM users WHERE username = :un AND password = :ps");
+        $query->bindParam(":un", $un);
+        $query->bindParam(":ps", $ps);
 
+        $query->execute();
+        if ($query->rowCount() == 1){
+            return true;
+        }else{
+            array_push($this->errors, Constants::$loginFailed);
+            return false;
+        }
+    }
     public function register($fn, $ln, $un, $em, $ps, $ps2)
     {
         $this->validateFirstName($fn);

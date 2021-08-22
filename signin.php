@@ -1,5 +1,30 @@
 <?php
 require 'include/config.php';
+require 'include/classes/Constants.php';
+require 'include/classes/FormValidation.php';
+require 'include/classes/Account.php';
+
+$account = new Account($conn);
+$validate = new FormValidation();
+if (isset($_POST['submit'])){
+    $username = FormValidation::sanitizeFormUsername($_POST['username']);
+    $password = FormValidation::sanitizeFormPassword($_POST['password']);
+
+    $isSuccessful = $account->login($username, $password);
+
+    if($isSuccessful){
+        //success
+        //redirect to index page
+        $_SESSION['username'] = $username;
+        header('location: index.php');
+    }else{
+        echo "Failed";
+    }
+
+}
+
+
+
 function getValue($name){
     if (isset($_POST[$name])){
         echo $_POST[$name];
@@ -31,8 +56,9 @@ function getValue($name){
         </div>
         <div class="signInForm">
             <form action="signin.php" method="post">
+                <?php echo $account->getError(Constants::$loginFailed)?>
                 <input type="text" name="username" placeholder="Username" value="<?php getValue('username'); ?>" autocomplete="off" required>
-                <input type="password" name="pass" placeholder="Password" autocomplete="off" required>
+                <input type="password" name="password" placeholder="Password" autocomplete="off" required>
                 <input type="submit" name="submit" value="SUBMIT">
             </form>
         </div>
