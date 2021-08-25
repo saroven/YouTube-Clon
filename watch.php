@@ -16,6 +16,8 @@ $video->incrementViews();
    echo $videoPlayer->create(true);
    ?>
 </div>
+<div class="suggestions">
 
+</div>
 
 <?php require 'include/footer.php'; ?>
