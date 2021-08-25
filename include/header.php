@@ -1,6 +1,7 @@
 <?php
 require_once "include/config.php";
 require_once "include/classes/User.php";
+require 'include/classes/Video.php';
 
 $usernameLoggedIn = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 $userLoggedInObj = new User($conn, $usernameLoggedIn);
