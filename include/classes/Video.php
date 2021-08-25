@@ -12,7 +12,6 @@ class Video
             $query = $this->conn->prepare("SELECT * FROM videos WHERE id=:id");
             $query->bindParam(":id", $input);
             $query->execute();
-
             $this->sqlData = $query->fetch(PDO::FETCH_ASSOC);
         }
 
@@ -58,6 +57,15 @@ class Video
     public function getViews()
     {
         return $this->sqlData['views'];
+    }
+    public function incrementViews()
+    {
+        $videoId = $this->getId();
+        $query = $this->conn->prepare("UPDATE videos SET views=views+1 WHERE id=:id");
+        $query->bindParam(":id", $videoId);
+        $query->execute();
+        $this->sqlData['views'] = $this->sqlData['views'] + 1;
+
     }
 
 }
