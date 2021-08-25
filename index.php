@@ -2,7 +2,7 @@
 
 <?php
   if (isset($_SESSION['username'])){
-      echo "Logged in as: ".$_SESSION['username'];
+      echo "Logged in as: ".$userLoggedInObj->getName();
   }else{
       echo "Not logged in.";
   }
