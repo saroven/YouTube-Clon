@@ -17,6 +17,25 @@ function likeVideo(button, videoId){
         dislikeButton.find("img:first").attr("src","assets/images/icons/thumb-down.png");
     })
 }
+function dislikeVideo(button, videoId){
+    $.post('ajax/dislikeVideo.php', {videoId: videoId}).done(function (data) {
+        let dislikeButton = $(button);
+        let likeButton = $(button).siblings(".likeButton");
+        dislikeButton.addClass("active");
+        likeButton.removeClass("active");
+        let result = JSON.parse(data);
+        updateLikeValue(dislikeButton.find(".text"), result.dislikes);
+        updateLikeValue(likeButton.find(".text"), result.likes);
+
+        if (result.dislikes < 0){
+            dislikeButton.removeClass("active");
+            dislikeButton.find("img:first").attr("src","assets/images/icons/thumb-down.png");
+        }else{
+            dislikeButton.find("img:first").attr("src","assets/images/icons/thumb-down-active.png");
+        }
+        likeButton.find("img:first").attr("src","assets/images/icons/thumb-up.png");
+    })
+}
 
 function updateLikeValue(element, number) {
     let likeCount = element.text() || 0;
