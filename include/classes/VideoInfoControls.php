@@ -18,6 +18,9 @@ class VideoInfoControls
         $imageSrc =  'assets/images/icons/thumb-up.png';
 
         //change like button if already liked..
+        if ($this->video->wasLikedBy()){
+            $imageSrc =  'assets/images/icons/thumb-up-active.png';
+        }
         return ButtonProvider::createButton($text, $imageSrc, $action,$class);
     }
     private function createDisLikeButton(){
@@ -27,7 +30,7 @@ class VideoInfoControls
         $class = "dislikeButton";
         $imageSrc = 'assets/images/icons/thumb-down.png';
 
-        //change like button if already liked..
+        //change dislike button if already liked..
         return ButtonProvider::createButton($text, $imageSrc, $action,$class);
     }
     public function create()
