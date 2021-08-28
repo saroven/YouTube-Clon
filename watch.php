@@ -10,7 +10,7 @@ $video  = new Video($conn, $_GET["id"], $userLoggedInObj);
 
 $video->incrementViews();
 ?>
-
+<script src="assets/js/videoPlayerAction.js"></script>
 <div class="watchLeftColumn">
    <?php
    $videoPlayer = new VideoPlayer($video);
