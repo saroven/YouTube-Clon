@@ -100,6 +100,11 @@ class Video
             $query->bindParam(":username", $username);
             $query->bindParam(":videoId", $id);
             $query->execute();
+            $result = array(
+                'likes' => -1,
+                'dislike' => 0
+            );
+            return json_encode($result);
         }else{
             //user not liked
             $query = $this->conn->prepare("DELETE FROM dislikes WHERE username= :username AND videoId=:videoId");
@@ -107,10 +112,18 @@ class Video
             $query->bindParam(":videoId", $id);
             $query->execute();
 
+            $count = $query->rowCount();
+
             $query = $this->conn->prepare("INSERT INTO likes(username, videoId) VALUES (:username, :videoId)");
             $query->bindParam(":username", $username);
             $query->bindParam(":videoId", $id);
             $query->execute();
+
+            $result = array(
+                'likes' => 1,
+                'dislikes' => 0 - $count
+            );
+            return json_encode($result);
         }
     }
 
