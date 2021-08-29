@@ -26,6 +26,11 @@ if (isset($_POST['submit'])){
     }
 
 }
+function getValue($name){
+    if (isset($_POST[$name])){
+        echo $_POST[$name];
+    }
+}
 
 ?>
 
@@ -53,7 +58,6 @@ if (isset($_POST['submit'])){
         </div>
         <div class="logInForm">
             <form action="signup.php" method="post">
-
                 <?php echo $account->getError(Constants::$firstNameCharacters)?>
                 <input type="text" name="fname" placeholder="First Name" value="<?php getValue('fname'); ?>" autocomplete="off" required>
 
