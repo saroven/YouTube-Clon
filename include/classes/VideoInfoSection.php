@@ -25,7 +25,7 @@ class VideoInfoSection
         return "<div class='videoInfo'> 
                     <h1>$title</h1> 
                     <div class='bottomSection'>
-                        <span class='videoCount'>$views</span>
+                        <span class='videoCount'>$views Views</span>
                         $controls
                     </div>
                 </div>";
