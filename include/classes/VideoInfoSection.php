@@ -32,7 +32,17 @@ class VideoInfoSection
     }
     public function createSecondaryInfo()
     {
+        $description = $this->video->getDescription();
+        $date = $this->video->getUploadDate();
+        $uploadedBy = $this->video->getUploadedBy();
 
+        $profileButton = ButtonProvider::createUserProfileButton($this->conn, $uploadedBy);
+
+        return "<div class='secondaryInfo'>
+                    <div class='topRow'>
+                        $profileButton
+                    </div>
+                </div>";
     }
 }
 

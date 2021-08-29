@@ -24,7 +24,7 @@ class Video
     }
     public function getUploadedBy()
     {
-        return $this->sqlData['uploadedBy'];
+        return $this->sqlData['uploadBy'];
     }
     public function getTitle()
     {

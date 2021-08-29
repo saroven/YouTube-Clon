@@ -1,4 +1,5 @@
 <?php
+
 class User
 {
     private $conn, $sqlData;
@@ -41,4 +42,6 @@ class User
     {
         return $this->sqlData['signUpDate'];
     }
+
+
 }
