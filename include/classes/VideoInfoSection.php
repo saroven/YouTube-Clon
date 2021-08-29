@@ -41,7 +41,8 @@ class VideoInfoSection
         {
             $actionButton = ButtonProvider::createEditVideoButton($this->video->getId());
         }else{
-            $actionButton = "";
+            $userToObj = new User($this->conn, $uploadedBy);
+            $actionButton = ButtonProvider::createSubscriberButton($this->conn, $userToObj, $this->userLoggedInObj);
         }
 
 

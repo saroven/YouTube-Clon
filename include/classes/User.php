@@ -13,7 +13,9 @@ class User
 
         $this->sqlData = $query->fetch(PDO::FETCH_ASSOC);
     }
-
+    public static function isLoggedIn(){
+        return $_SESSION['username'];
+    }
     public function getUserName()
     {
         return $this->sqlData['username'];
@@ -41,6 +43,26 @@ class User
     public function getSignUpDate()
     {
         return $this->sqlData['signUpDate'];
+    }
+
+    public function isSubscribedTo($userTo)
+    {
+        $username = $this->getUserName();
+        $query = $this->conn->prepare("SELECT * FROM subscribers WHERE userTo=:userTo AND userFrom=:userFrom");
+        $query->bindParam(":userTo",$userTo);
+        $query->bindParam(":userFrom",$username);
+        $query->execute();
+
+        return $query->rowCount() > 0;
+    }
+    public function getSubscriberCount()
+    {
+        $username = $this->getUserName();
+        $query = $this->conn->prepare("SELECT * FROM subscribers WHERE userTo=:userTo");
+        $query->bindParam(":userTo",$username);
+        $query->execute();
+
+        return $query->rowCount() > 0;
     }
 
 
