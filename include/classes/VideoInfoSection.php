@@ -35,20 +35,29 @@ class VideoInfoSection
         $description = $this->video->getDescription();
         $uploadDate = $this->video->getUploadDate();
         $uploadedBy = $this->video->getUploadedBy();
-
         $profileButton = ButtonProvider::createUserProfileButton($this->conn, $uploadedBy);
+
+        if ($uploadedBy == $this->userLoggedInObj->getUserName())
+        {
+            $actionButton = ButtonProvider::createEditVideoButton($this->video->getId());
+        }else{
+            $actionButton = "";
+        }
+
+
 
         return "<div class='secondaryInfo'>
                     <div class='topRow'>
-                        $profileButton
-                    </div>
-                    <div class='uploadInfo'>
-                        <span class='owner'>
-                            <a href='profile.php?username=$uploadedBy'>
-                                $uploadedBy
-                            </a>
-                        </span>
-                        <span class='date'>Published on: $uploadDate</span>
+                            $profileButton
+                        <div class='uploadInfo'>
+                            <span class='owner'>
+                                <a href='profile.php?username=$uploadedBy'>
+                                    $uploadedBy
+                                </a>
+                            </span>
+                            <span class='date'>Published on: $uploadDate</span>
+                        </div>
+                        $actionButton
                     </div>
                 </div>";
     }
