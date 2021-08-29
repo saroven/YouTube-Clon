@@ -62,7 +62,7 @@ class User
         $query->bindParam(":userTo",$username);
         $query->execute();
 
-        return $query->rowCount() > 0;
+        return $query->rowCount();
     }
 
 
