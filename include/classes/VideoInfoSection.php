@@ -33,7 +33,7 @@ class VideoInfoSection
     public function createSecondaryInfo()
     {
         $description = $this->video->getDescription();
-        $date = $this->video->getUploadDate();
+        $uploadDate = $this->video->getUploadDate();
         $uploadedBy = $this->video->getUploadedBy();
 
         $profileButton = ButtonProvider::createUserProfileButton($this->conn, $uploadedBy);
@@ -41,6 +41,14 @@ class VideoInfoSection
         return "<div class='secondaryInfo'>
                     <div class='topRow'>
                         $profileButton
+                    </div>
+                    <div class='uploadInfo'>
+                        <span class='owner'>
+                            <a href='profile.php?username=$uploadedBy'>
+                                $uploadedBy
+                            </a>
+                        </span>
+                        <span class='date'>Published on: $uploadDate</span>
                     </div>
                 </div>";
     }
