@@ -5,6 +5,12 @@ function subscribe(userTo,userFrom, button){
     }
     $.post("ajax/subscribe.php", {userTo: userTo, userFrom: userFrom})
         .done(function (data){
-        console.log("done", data);
+        if (data != null){
+            $(button).toggleClass("subscribe unsubscribe");
+            let butonText = $(button).hasClass("subscribe") ? "SUBSCRIBE" : "SUBSCRIBED";
+            $(button).text(butonText+ " " + data);
+        }else {
+            alert("Something went wrong!");
+        }
     })
 }
