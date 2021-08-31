@@ -13,16 +13,25 @@ class CommentSection
 
     public function create()
     {
-        $this->createCommentSection();
+        return $this->createCommentSection();
     }
+
     private function createCommentSection()
     {
-        $numComment =  $this->video->getNumberOfComment();
+        $numComments =  $this->video->getNumberOfComment();
         $postedBy = $this->userLoggedInObj->getUserName();
         $videoId = $this->video->getId();
         $profileButton = ButtonProvider::createUserProfileButton($this->conn, $postedBy);
         $commentAction = "postComment(this, \"$postedBy\", $videoId, null, \"comments\")";
         $commentButton = ButtonProvider::createButton('COMMENT', $commentAction, 'postComment', 'comment');
+
+        //comment html
+
+        return "<div class='commentSection'>
+                    <div class='header'>
+                        <span class='commentCount'>$numComments Comments</span>
+                    </div>
+                </div>";
     }
 }
 
