@@ -22,6 +22,6 @@
         $comment = new Comment($conn, $query->lastInsertId, $userLoggedInObj, $videoId);
         echo $comment->create();
     }else{
-        echo "One or more parameter are not passed into the subscribe.php file!";
+        echo "One or more parameter are not passed into the postComment.php file!";
     }
 ?>
