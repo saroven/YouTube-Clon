@@ -4,6 +4,9 @@
     require '../include/classes/Comment.php';
 
     if (isset($_POST['commentText']) && isset($_POST['postedBy']) && isset($_POST['videoId'])){
+
+        $userLoggedInObj = new User($conn, $_SESSION['username']);
+
         $query = $conn->prepare("INSERT INTO comments(postedBy, videoId, responseTo, body)
                                         VALUES (:postedBy, :videoId, :responseTo, :body)");
         $postedBy = $_POST['postedBy'];
@@ -18,8 +21,7 @@
 
         $query->execute();
         //return new comment
-        $userLoggedInObj = new User($conn, $_SESSION['username']);
-        $comment = new Comment($conn, $query->lastInsertId, $userLoggedInObj, $videoId);
+        $comment = new Comment($conn, $conn->lastInsertId(), $userLoggedInObj, $videoId);
         echo $comment->create();
     }else{
         echo "One or more parameter are not passed into the postComment.php file!";
