@@ -100,9 +100,12 @@ a {
   padding-left: 250px;
 }
 .mainContentContainer {
-  padding: 10px 30px;
-  display: flex;
-  flex: 1;
+    padding: 10px 30px;
+    display: flex;
+    flex: 1;
+    background-color: #fafafa;
+    box-sizing: border-box;
+
 }
 .column {
   flex-grow: 1;
