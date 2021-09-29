@@ -11,7 +11,7 @@
                                         VALUES (:postedBy, :videoId, :responseTo, :body)");
         $postedBy = $_POST['postedBy'];
         $videoId = $_POST['videoId'];
-        $responseTo = $_POST['responseTo'];
+        $responseTo = $_POST['responseTo'] ?? 0;
         $commentText = $_POST['commentText'];
 
         $query->bindParam(":postedBy", $postedBy);
@@ -22,6 +22,7 @@
         $query->execute();
         //return new comment
         $comment = new Comment($conn, $conn->lastInsertId(), $userLoggedInObj, $videoId);
+//        echo $conn->lastInsertId();
         echo $comment->create();
     }else{
         echo "One or more parameter are not passed into the postComment.php file!";
