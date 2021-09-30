@@ -50,8 +50,24 @@ class CommentControls
         return "<span class='liksCount'>$text</span>";
     }
     private function createReplySection(){
+        $postedBy = $this->userLoggedInObj->getUserName();
+        $videoId = $this->comment->getVideoId();
+        $commentId = $this->comment->getId();
+        $profileButton = ButtonProvider::createUserProfileButton($this->conn, $postedBy);
+        $cancelButtonAction = "toggleReply(this)";
+        $cancelButton = ButtonProvider::createButton('Cancel', null, $cancelButtonAction, 'cancelComment');
 
-        return "";
+        $postAction = "postComment(this, \"$postedBy\", $videoId, $commentId, \"repliesSection\")";
+        $postButton = ButtonProvider::createButton('Reply', null, $postAction, 'postComment');
+
+        return "
+                <div class='commentForm hidden'>
+                    $profileButton
+                    <textarea class='commentBodyClass' placeholder='Add a public comment.'></textarea>
+                    $cancelButton
+                    $postButton                    
+                </div>
+                ";
     }
 
     public function create()
@@ -62,6 +78,12 @@ class CommentControls
         $disLikeButton = $this->createDisLikeButton();
         $replySection = $this->createReplySection();
 
-        return "<div class='controls'>$likeButton $disLikeButton</div>";
+        return "<div class='controls'>
+                $replyButton
+                $likesCount
+                $likeButton 
+                $disLikeButton
+                </div>
+                $replySection";
     }
 }
