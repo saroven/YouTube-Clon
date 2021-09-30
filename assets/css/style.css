@@ -305,7 +305,9 @@ a {
   display: flex;
   flex-direction: column;
 }
-.commentSection .header .commentForm .profilePic, .commentSection .comment .profilePic{
+.commentSection .header .commentForm .profilePic,
+.commentSection .comment .profilePic,
+.commentForm .profilePic{
   margin-top: 16px;
   height: 48px;
   width: 48px;
@@ -360,4 +362,34 @@ a {
   color: #111;
   font-size: 13px;
   font-weight: 500;
+}
+.commentSection .comment .body{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.itemContainer .controls{
+  margin-left: 64px;
+}
+.itemContainer .controls button,
+.itemContainer .controls .liksCount{
+  height: 32px;
+  background-color: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(17,17,17,0.6);
+}
+.itemContainer .controls button{
+  cursor: pointer;
+}
+.itemContainer .controls .liksCount{
+  margin: 0 5px;
+}
+.itemContainer .controls button img{
+  height: 16px;
+}
+.itemContainer .commentForm .profilePic{
+  width: 30px;
+  height: 30px;
 }
