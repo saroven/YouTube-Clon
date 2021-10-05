@@ -402,3 +402,13 @@ a {
 .hidden {
   display: none !important;
 }
+.comments .repliesSection{
+ padding-left: 64px;
+  margin-top: 15px;
+}
+
+.commentSection .itemContainer .viewReplies{
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
