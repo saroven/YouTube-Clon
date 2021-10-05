@@ -61,3 +61,12 @@ function updateLikeValue(element, number) {
     let likeCount = element.text() || 0;
     element.text(parseInt(likeCount) + parseInt(number));
 }
+
+function getReplies(commentId, button, videoId){
+    $.post("ajax/getCommentReplies.php", { commentId: commentId, videoId: videoId })
+        .done(function (comments) {
+            let replies = $('<div>').addClass('repliesSection');
+            replies.append(comments);
+            $(button).replaceWith(replies);
+        })
+}
