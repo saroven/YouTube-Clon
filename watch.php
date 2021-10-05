@@ -4,6 +4,8 @@ require 'include/classes/VideoPlayer.php';
 require 'include/classes/VideoInfoSection.php';
 require 'include/classes/CommentSection.php';
 require 'include/classes/Comment.php';
+require 'include/classes/ButtonProvider.php';
+
 
 if (!isset($_GET['id']) || empty($_GET['id'])){
     die("No url passed into page");

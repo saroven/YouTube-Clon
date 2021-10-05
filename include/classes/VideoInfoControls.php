@@ -1,5 +1,4 @@
 <?php
-require 'include/classes/ButtonProvider.php';
 
 class VideoInfoControls
 {
