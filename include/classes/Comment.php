@@ -1,5 +1,5 @@
 <?php
-require 'ButtonProvider.php';
+//require 'ButtonProvider.php';
 require 'CommentControls.php';
 class Comment
 {
