@@ -13,3 +13,9 @@ function postComment(button, postedBy, videoId, replyTo, containerClass)
         alert("You can't post empty comment.");
     }
 }
+
+function toggleReply(button) {
+    let parent = $(button).closest(".itemContainer");
+    let commentForm = parent.find(".commentForm").first();
+    commentForm.toggleClass('hidden');
+}
