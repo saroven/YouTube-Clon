@@ -145,4 +145,60 @@ class Comment
 
         return $numLikes - $numDisLikes;
     }
+    public function like()
+    {
+        $id = $this->getId();
+        $username = $this->userLoggedInObj->getUserName();
+        if ($this->wasLikedBy()){
+            //user is already liked
+            $query = $this->conn->prepare("DELETE FROM likes WHERE username= :username AND commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $id);
+            $query->execute();
+            return -1;
+        }else{
+            //user not liked
+            $query = $this->conn->prepare("DELETE FROM dislikes WHERE username= :username AND commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $id);
+            $query->execute();
+
+            $count = $query->rowCount();
+
+            $query = $this->conn->prepare("INSERT INTO likes(username, commentId) VALUES (:username, :commentId)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $id);
+            $query->execute();
+
+            return 1 + $count;
+        }
+    }
+    public function disLike()
+    {
+        $id = $this->getId();
+        $username = $this->userLoggedInObj->getUserName();
+        if ($this->wasDislikedBy()){
+            //user is already liked
+            $query = $this->conn->prepare("DELETE FROM dislikes WHERE username= :username AND commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $id);
+            $query->execute();
+
+            return 1;
+        }else{
+            //user not liked
+            $query = $this->conn->prepare("DELETE FROM likes WHERE username= :username AND commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $id);
+            $query->execute();
+
+            $count = $query->rowCount();
+
+            $query = $this->conn->prepare("INSERT INTO dislikes(username, commentId) VALUES (:username, :commentId)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $id);
+            $query->execute();
+            return -1 - $count;
+        }
+    }
 }

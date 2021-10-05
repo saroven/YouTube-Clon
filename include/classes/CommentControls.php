@@ -47,7 +47,7 @@ class CommentControls
     private function createLikesCount(){
         $text = $this->comment->getLikes();
         if($text == 0) $text = '';
-        return "<span class='liksCount'>$text</span>";
+        return "<span class='likesCount'>$text</span>";
     }
     private function createReplySection(){
         $postedBy = $this->userLoggedInObj->getUserName();
