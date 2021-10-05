@@ -3,8 +3,8 @@ require 'include/header.php';
 require 'include/classes/VideoPlayer.php';
 require 'include/classes/VideoInfoSection.php';
 require 'include/classes/CommentSection.php';
-require 'include/classes/Comment.php';
 require 'include/classes/ButtonProvider.php';
+require 'include/classes/Comment.php';
 
 
 if (!isset($_GET['id']) || empty($_GET['id'])){

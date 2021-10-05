@@ -1,4 +1,5 @@
 <?php
+include_once 'ButtonProvider.php';
 require 'CommentControls.php';
 class Comment
 {
