@@ -1,7 +1,9 @@
 <?php
 require_once "include/config.php";
+require_once "include/classes/ButtonProvider.php";
 require_once "include/classes/User.php";
 require 'include/classes/Video.php';
+require 'include/classes/VideoGrid.php';
 
 $usernameLoggedIn = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 $userLoggedInObj = new User($conn, $usernameLoggedIn);
