@@ -31,7 +31,10 @@ $video->incrementViews();
    ?>
 </div>
 <div class="suggestions">
-
+    <?php
+        $videoGrid = new VideoGrid($conn, $userLoggedInObj);
+        echo $videoGrid->create(null, null, false);
+    ?>
 </div>
 
 <?php require 'include/footer.php'; ?>

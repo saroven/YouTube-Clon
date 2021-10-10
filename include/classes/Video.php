@@ -197,5 +197,12 @@ class Video
         }
         return $comments;
     }
+    public function getThumbnail(){
+        $query = $this->conn->prepare("SELECT filePath FROM thumbnails WHERE videoId=:VideoId AND selected=1");
+        $videoId = $this->getId();
+        $query->bindParam(":VideoId", $videoId);
+        $query->execute();
+        return $query->fetchColumn();
+    }
 
 }
