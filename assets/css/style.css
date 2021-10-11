@@ -431,6 +431,7 @@ span.likesCount {
   height: auto;
 }
 .videoGridItem{
+  height: 200px;
   margin-right: 4px;
   margin-bottom: 24px;
 }
