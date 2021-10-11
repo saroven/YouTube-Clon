@@ -45,6 +45,21 @@ class VideoGrid
     }
     public function createGridHeader($title, $showFilter){
         $filter = "";
+        if ($showFilter){
+            $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $urlArray  = parse_url($url);
+            $query = $urlArray['query'];
+            parse_str($query, $params);
+            unset($params['orderBy']);
+            $newQuery = http_build_query($params);
+            $newUrl = basename($_SERVER["PHP_SELF"]). '?' . $newQuery;
+            $filter = "<div class='videoGridHeader'>
+                        <span>Order By:</span>
+                        <a href='$newUrl&orderBy=uploadDate'>Upload Date</a>
+                        <a href='$newUrl&orderBy=views'>Most Viewed</a>
+                       </div>";
+
+        }
         return "<div class='videoGridHeader'>
                    <div class='left'>$title</div>
                    $filter
