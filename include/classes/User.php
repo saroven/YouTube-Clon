@@ -65,5 +65,19 @@ class User
         return $query->rowCount();
     }
 
+    public function getSubscriptions()
+    {
+        $query = $this->conn->prepare("SELECT userTo FROM subscribers WHERE userFrom=:userFrom");
+        $username = $this->getUserName();
+        $query->bindParam(":userFrom", $username);
+        $query->execute();
+        $subs = array();
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)){
+            $user = new User($this->conn, $row['userTo']);
+            array_push($subs, $user);
+        }
+        return $subs;
+    }
+
 
 }

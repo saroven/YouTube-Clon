@@ -2,7 +2,13 @@
 
 <div class="videoSection">
     <?php
-        $videoGrid = new VideoGrid($conn, $userLoggedInObj->getUsername());
+        $subscriptionProvider = new SubscriptionProvider($conn, $userLoggedInObj);
+        $subscriptionVideos = $subscriptionProvider->getVideos();
+        $videoGrid = new VideoGrid($conn, $userLoggedInObj->getUserName());
+
+        if (User::isLoggedIn() && sizeof($subscriptionVideos) > 0){
+            echo $videoGrid->create($subscriptionVideos, "Subscriptions", false);
+        }
         echo $videoGrid->create(null, "Recommended", false);
     ?>
 </div>

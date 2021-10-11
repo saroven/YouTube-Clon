@@ -5,6 +5,7 @@ require_once "include/classes/User.php";
 require 'include/classes/Video.php';
 require 'include/classes/VideoGrid.php';
 require 'include/classes/VideoGridItem.php';
+require 'include/classes/SubscriptionProvider.php';
 
 $usernameLoggedIn = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 $userLoggedInObj = new User($conn, $usernameLoggedIn);
