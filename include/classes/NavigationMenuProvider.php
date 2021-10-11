@@ -19,8 +19,8 @@ class NavigationMenuProvider
         if (User::isLoggedIn()){
             $menuHtml .= $this->createNavItem("Settings", "assets/images/icons/settings.png", "settings.php");
             $menuHtml .= $this->createNavItem("Log Out", "assets/images/icons/logout.png", "logout.php");
+            $menuHtml .= $this->createSubscriptionSection();
         }
-         //create subscription section
             return "<div class='navigationItem'>
                         $menuHtml
                     </div>";
@@ -34,5 +34,16 @@ class NavigationMenuProvider
                         <span>$text</span>
                     </a>
                 </div>";
+    }
+
+    public function createSubscriptionSection()
+    {
+        $subscription = $this->userLoggedInObj->getSubscriptions();
+        $html = "<span class='heading'>Subscriptions</span>";
+        foreach ($subscription  as $sub){
+            $subusername = $sub->getUserName();
+            $html .= $this->createNavItem($subusername, $sub->getProfilePic(), "profile.php?username=$subusername");
+        }
+        return $html;
     }
 }
