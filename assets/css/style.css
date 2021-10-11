@@ -496,3 +496,6 @@ span.likesCount {
   padding-bottom: 10px;
   border-bottom: 1px solid #e8e8e8;
 }
+.videoGridHeader div{
+  flex: 1;
+}
