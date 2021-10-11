@@ -17,7 +17,7 @@ class VideoGrid
         }
         $header = "";
         if ($title != null){
-            $this->createGridHeader($title, $showFilter);
+            $header = $this->createGridHeader($title, $showFilter);
         }
         return "$header
                 <div class='$this->gridClass'>
@@ -39,6 +39,10 @@ class VideoGrid
 
     }
     public function createGridHeader($title, $showFilter){
-
+        $filter = "";
+        return "<div class='videoGridHeader'>
+                   <div class='left'>$title</div>
+                   $filter
+                </div>";
     }
 }
