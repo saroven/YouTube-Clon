@@ -1,11 +1,13 @@
 <?php
 require_once "include/config.php";
-//require_once "include/classes/ButtonProvider.php";
+require_once "include/classes/ButtonProvider.php";
 require_once "include/classes/User.php";
 require 'include/classes/Video.php';
 require 'include/classes/VideoGrid.php';
 require 'include/classes/VideoGridItem.php';
 require 'include/classes/SubscriptionProvider.php';
+
+session_destroy();
 
 $usernameLoggedIn = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 $userLoggedInObj = new User($conn, $usernameLoggedIn);
@@ -47,9 +49,7 @@ $userLoggedInObj = new User($conn, $usernameLoggedIn);
      <a href="upload.php">
       <img src="./assets/images/icons/upload.png" alt="upload btn">
     </a>
-   <a href="#">
-      <img src="./assets/images/profilePictures/default.png" alt="Profile">
-   </a>
+       <?php echo ButtonProvider::createUserProfileNavigationButton($conn, $userLoggedInObj->getUserName()) ?>
 </div>
 </div>
 <div class="sideNavContainer" style="display:none;">
