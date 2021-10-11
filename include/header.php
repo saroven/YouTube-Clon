@@ -6,8 +6,7 @@ require 'include/classes/Video.php';
 require 'include/classes/VideoGrid.php';
 require 'include/classes/VideoGridItem.php';
 require 'include/classes/SubscriptionProvider.php';
-
-session_destroy();
+require 'include/classes/NavigationMenuProvider.php';
 
 $usernameLoggedIn = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 $userLoggedInObj = new User($conn, $usernameLoggedIn);
@@ -53,7 +52,10 @@ $userLoggedInObj = new User($conn, $usernameLoggedIn);
 </div>
 </div>
 <div class="sideNavContainer" style="display:none;">
-
+    <?php
+        $navigationProvider = new NavigationMenuProvider($conn, $userLoggedInObj);
+        echo $navigationProvider->create();
+    ?>
 </div>
 <div class="mainSectionContainer">
    <div class="mainContentContainer">
