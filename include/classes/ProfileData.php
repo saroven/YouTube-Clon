@@ -18,7 +18,8 @@ class ProfileData
     public function usersExist()
     {
         $query = $this->conn->prepare("SELECT * FROM users WHERE username=:username");
-        $query->bindParam(":username", $this->getProfileUsername());
+        $username = $this->getProfileUsername();
+        $query->bindParam(":username", $username);
         $query->execute();
 
         return $query->rowCount() != 0;
