@@ -42,7 +42,22 @@ class ProfileGenerator
     }
     public function createHeaderSection()
     {
+        $profileImage = $this->profileData->getProfilePic();
+        $name = $this->profileData->getProfileUserFullName();
+        $subscriberCount = $this->profileData->getSubscriberCount();
 
+        echo "<div class='profileHeader'>
+                    <div class='userInfoContainer'>
+                        <img src='$profileImage' class='profileImage'>
+                        <div class='userInfo'>
+                            <span class='title'>$name</span>
+                            <span class='subscriberCount'>$subscriberCount Subscribers</span>
+                        </div>
+                    </div>
+                    <div class='buttonContainer'>
+                        
+                    </div>
+                </div>";
     }
     public function createTabsSection()
     {
