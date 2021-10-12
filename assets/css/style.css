@@ -580,3 +580,29 @@ span.likesCount {
   border-top: 1px solid #ededed;
   display: block;
 }
+.profileContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.coverPhotoContainer{
+  flex: 1;
+  position: relative;
+  height: 200px;
+}
+.coverPhotoContainer .coverPhoto{
+	width: 100%;
+	object-fit: cover;
+	max-height: 150px;
+	vertical-align: middle;
+}
+.coverPhotoContainer .channelName{
+	position: absolute;
+	top: calc(50% - 60px);
+	left: 0;
+	text-align: center;
+	width: 100%;
+	color: #fff;
+	font-size: 50px;
+	letter-spacing: 5px;
+}
