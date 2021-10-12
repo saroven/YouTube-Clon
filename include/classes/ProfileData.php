@@ -14,4 +14,13 @@ class ProfileData
     {
         return $this->profileUserObj->getUserName();
     }
+
+    public function usersExist()
+    {
+        $query = $this->conn->prepare("SELECT * FROM users WHERE username=:username");
+        $query->bindParam(":username", $this->getProfileUsername());
+        $query->execute();
+
+        return $query->rowCount() != 0;
+    }
 }
