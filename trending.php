@@ -12,7 +12,6 @@
         if (sizeof($videos) > 0){
             echo $videoGrid->createLarge($videos, "Trending videos uploaded in the last week", false);
         }else{
-            print_r($videos);
             echo "No trending videos to show";
         }
     ?>
