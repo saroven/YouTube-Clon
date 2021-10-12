@@ -16,7 +16,34 @@ class ProfileGenerator
     {
         $profileUsername = $this->profileData->getProfileUsername();
         if (!$this->profileData->usersExist()){
-        die("Channel Not Found");
+        die("User Not Found");
         }
+        $coverPhotoSection = $this->createCoverPhotoSection();
+        $headerSection = $this->createHeaderSection();
+        $tabsSection = $this->createTabsSection();
+        $contentSection = $this->createContentSection();
+        return "<div class='profileContainer'>
+                    $coverPhotoSection
+                    $headerSection
+                    $tabsSection
+                    $contentSection
+                </div>";
+    }
+
+    public function createCoverPhotoSection()
+    {
+        echo $this->profileData->getCoverPhoto();
+    }
+    public function createHeaderSection()
+    {
+
+    }
+    public function createTabsSection()
+    {
+
+    }
+    public function createContentSection()
+    {
+
     }
 }
