@@ -9,7 +9,7 @@ class SettingsFormProvider
 			$emailInput = $this->createEmailInput($email);
 			$saveUserDetailsButton = $this->createSaveUserDetailsButton();
 
-			return "<form action='../../processing.php' method='POST' class='userDetailForm'>
+			return "<form action='settings.php' method='POST' class='userDetailForm'>
                         <span class='title'>User Details</span>
                         $firstNameInput
                         $lastNameInput
@@ -23,7 +23,7 @@ class SettingsFormProvider
 			$confirmNewPasswordInput = $this->createPasswordInput('confirmNewPass', 'Confirm New Password');
 			$savePasswordButton = $this->createSavePasswordButton();
 
-			return "<form action='../../processing.php' method='POST'>
+			return "<form action='settings.php' method='POST'>
                         <span class='title'>Update Password</span>
                         $oldPasswordInput
                         $newPasswordInput
