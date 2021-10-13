@@ -10,6 +10,7 @@ class SettingsFormProvider
 			$saveUserDetailsButton = $this->createSaveUserDetailsButton();
 
 			return "<form action='../../processing.php' method='POST'>
+                        <span class='title'>User Details</span>
                         $firstNameInput
                         $lastNameInput
                         $emailInput
