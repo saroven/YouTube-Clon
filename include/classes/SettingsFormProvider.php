@@ -3,13 +3,13 @@
 class SettingsFormProvider
 {
 
-		public function createUserDetailsForm(){
-			$firstNameInput = $this->createFirstNameInput(null);
-			$lastNameInput = $this->createLastNameInput(null);
-			$emailInput = $this->createEmailInput(null);
+		public function createUserDetailsForm($firstName, $lastName, $email){
+			$firstNameInput = $this->createFirstNameInput($firstName);
+			$lastNameInput = $this->createLastNameInput($lastName);
+			$emailInput = $this->createEmailInput($email);
 			$saveUserDetailsButton = $this->createSaveUserDetailsButton();
 
-			return "<form action='../../processing.php' method='POST'>
+			return "<form action='../../processing.php' method='POST' class='userDetailForm'>
                         <span class='title'>User Details</span>
                         $firstNameInput
                         $lastNameInput

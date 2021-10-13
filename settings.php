@@ -13,7 +13,11 @@ $settingsFormProvider = new SettingsFormProvider();
 <div class="settingsContainer column">
     <div class="formSection">
         <?php
-        echo $settingsFormProvider->createUserDetailsForm();
+        echo $settingsFormProvider->createUserDetailsForm(
+                $_POST['fname'] ?? $userLoggedInObj->getFirstName(),
+            $_POST['lname'] ?? $userLoggedInObj->getLastName(),
+            $_POST['email'] ?? $userLoggedInObj->getEmail()
+        );
         echo $settingsFormProvider->createPasswordForm();
         ?>
     </div>
