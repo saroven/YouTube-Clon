@@ -31,3 +31,4 @@ if ($video->getUploadedBy() != $userLoggedInObj->getUserName()){
 
     </div>
 </div>
+<script src="assets/js/editVideoActions.js"></script>
