@@ -62,7 +62,11 @@ class ProfileData
     }
     private function getTotalViews()
     {
-        return "test";
+        $query = $this->conn->prepare("SELECT sum(views) FROM videos WHERE uploadBy=:uploadedBy");
+        $profileUsername = $this->getProfileUsername();
+        $query->bindParam(":uploadedBy", $profileUsername);
+        $query->execute();
+        return $query->fetchColumn();
     }
     private  function getSignUpDate()
     {
