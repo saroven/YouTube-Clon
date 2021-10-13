@@ -30,7 +30,7 @@ class selectThumbnail
         $id = $data['id'];
         $url = $data['filePath'];
         $videoId = $data['videoid'];
-        $selected = $data['selected'] == 1 ? "Selected" : "";
+        $selected = $data['selected'] == 1 ? "selected" : "";
 
         return "<div class='thumbnailItem $selected' onclick='setNewThumbnail($id, $videoId, this)'>
                     <img src='$url'>
