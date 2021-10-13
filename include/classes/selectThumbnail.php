@@ -13,6 +13,28 @@ class selectThumbnail
     public function create()
     {
         $thumbnailData = $this->getThumbnailData();
+
+        $html = "";
+
+        foreach ($thumbnailData as $data){
+            $html .= $this->createThumbnail($data);
+        }
+
+        return "<div class='thumbnailItemsContainer'>
+                    $html
+                </div>";
+    }
+
+    private function createThumbnail($data)
+    {
+        $id = $data['id'];
+        $url = $data['filePath'];
+        $videoId = $data['videoid'];
+        $selected = $data['selected'] == 1 ? "Selected" : "";
+
+        return "<div class='thumbnailItem $selected' onclick='setNewThumbnail($id, $videoId, this)'>
+                    <img src='$url'>
+                </div>";
     }
     private function getThumbnailData(){
         $data = array();
