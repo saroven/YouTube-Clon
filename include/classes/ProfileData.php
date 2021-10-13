@@ -60,4 +60,23 @@ class ProfileData
         }
         return $videos;
     }
+    private function getTotalViews()
+    {
+        return "test";
+    }
+    private  function getSignUpDate()
+    {
+        return "test";
+    }
+
+    public function getAllUserDetails()
+    {
+        return array(
+            "Name" => $this->getProfileUserFullName(),
+            "Username" => $this->getProfileUsername(),
+            "Subscribers" => $this->getSubscriberCount(),
+            "Total views" => $this->getTotalViews(),
+            "Sign up date" => $this->getSignUpDate()
+            );
+    }
 }

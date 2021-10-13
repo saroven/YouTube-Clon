@@ -85,12 +85,13 @@ class ProfileGenerator
         }else{
             $videoGridHtml = "<span>This user has no videos.</span>";
         }
+        $aboutSection = $this->createAboutSection();
         return "<div class='tab-content channelContent'>
                   <div class='tab-pane fade show active' id='videos' role='tabpanel' aria-labelledby='videos-tab'>
                     $videoGridHtml
                   </div>
                   <div class='tab-pane fade' id='about' role='tabpanel' aria-labelledby='about-tab'>
-                    About tab
+                    $aboutSection
                   </div>
                 </div>";
     }
@@ -104,5 +105,20 @@ class ProfileGenerator
                                                     $this->profileData->getProfileUserObj(),
                                                     $this->userLoggedInObj);
         }
+    }
+
+    public function createAboutSection()
+    {
+        $html = "<div class='section'>
+                    <div class='title'>
+                        <span>Details</span>
+                    </div>
+                    <div class='values'>";
+        $details = $this->profileData->getAllUserDetails();
+        foreach ($details as $key => $value){
+            $html .= "<span>$key: $value</span>";
+        }
+        $html .= "</div></div>";
+        return $html;
     }
 }
