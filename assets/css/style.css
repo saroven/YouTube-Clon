@@ -685,7 +685,7 @@ a:hover{
   display: flex;
 }
 .topSection .videoPlayer{
-  max-height: 300px;
+  max-height: 320px;
   flex: 1;
 }
 .editVideoContainer .topSection .thumbnailItemsContainer{
