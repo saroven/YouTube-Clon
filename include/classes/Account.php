@@ -55,6 +55,33 @@ class Account
             return false;
         }
     }
+    public function updatePassword($oldpass, $newpass, $confirmNewPass, $un)
+    {
+        $this->validateOldPassword($oldpass, $un);
+        $this->validatePassword($newpass, $confirmNewPass);
+
+        if (empty($this->errors)){
+            $query = $this->conn->prepare("UPDATE users SET password=:ps WHERE username=:un");
+            $ps = hash('sha512', $newpass);
+            $query->bindParam(":ps", $ps);
+            $query->bindParam(":un", $un);
+
+            return $query->execute();
+        }else{
+            return false;
+        }
+    }
+    public function validateOldPassword($oldPassword, $un){
+        $ps = hash('sha512', $oldPassword);
+        $query = $this->conn->prepare("SELECT * FROM users WHERE username = :un AND password = :ps");
+        $query->bindParam(":un", $un);
+        $query->bindParam(":ps", $ps);
+
+        $query->execute();
+        if ($query->rowCount() == 0){
+            array_push($this->errors, Constants::$passwordIncorrect);
+        }
+    }
     public function insertUserData($fn, $ln, $un, $em, $ps){
         $ps = hash('sha512', $ps);
         $pp = 'assets/images/profilePictures/default.png';

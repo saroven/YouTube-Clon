@@ -61,6 +61,6 @@ class SettingsFormProvider
 	        return"<button type='submit' name='saveDetailsButton' class='btn btn-primary mt-3'>Save</button>";
         }
         private function createSavePasswordButton(){
-	        return"<button type='submit' name='savePassword' class='btn btn-primary mt-3'>Save Password</button>";
+	        return"<button type='submit' name='savePasswordButton' class='btn btn-primary mt-3'>Save Password</button>";
         }
 }
