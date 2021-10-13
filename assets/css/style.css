@@ -1,6 +1,6 @@
 html,
 body {
-  height: 100%;
+  /*height: 100%;*/
   padding: 0;
   margin: 0;
 }
@@ -101,7 +101,7 @@ a {
 }
 .mainContentContainer {
     padding: 10px 30px;
-    /*display: flex;*/
+    display: flex;
     flex: 1;
     background-color: #fafafa;
     box-sizing: border-box;
@@ -373,7 +373,7 @@ a {
   margin-left: 64px;
 }
 .itemContainer .controls button,
-.itemContainer .controls .liksCount{
+.itemContainer .controls .likesCount{
   height: 32px;
   background-color: transparent;
   border: none;
@@ -384,7 +384,7 @@ a {
 .itemContainer .controls button{
   cursor: pointer;
 }
-.itemContainer .controls .liksCount{
+.itemContainer .controls .likesCount{
   margin: 0 5px;
 }
 .itemContainer .controls button img{
@@ -416,11 +416,6 @@ a {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-}
-span.likesCount {
-    color: rgba(17,17,17,0.4);
-    font-weight: 500;
-    font-size: 13px;
 }
 .videoGrid{
   display: flex;

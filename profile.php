@@ -10,7 +10,11 @@ if (isset($_GET['username']) && $_GET['username'] != ""){
 $profileGenerator = new ProfileGenerator($conn, $userLoggedInObj, $profileUsername);
 $profileGenerator->create();
 ?>
-
+<script>
+    //for fixing css issue
+    const mainContentContainer = document.querySelector('.mainContentContainer');
+    mainContentContainer.style.display = 'grid';
+</script>
 <?php
 require_once 'include/footer.php';
 ?>
