@@ -22,7 +22,7 @@ class ProfileGenerator
         $headerSection = $this->createHeaderSection();
         $tabsSection = $this->createTabsSection();
         $contentSection = $this->createContentSection();
-        return "<div class='profileContainer'>
+        echo "<div class='profileContainer'>
                     $coverPhotoSection
                     $headerSection
                     $tabsSection
@@ -35,7 +35,7 @@ class ProfileGenerator
         $coverPhoto =  $this->profileData->getCoverPhoto();
         $name = $this->profileData->getProfileUserFullName();
 
-        echo "<div class='coverPhotoContainer'>
+        return "<div class='coverPhotoContainer'>
                     <img src='$coverPhoto' class='coverPhoto'>
                     <span class='channelName'>$name</span>
                 </div>";
@@ -48,7 +48,7 @@ class ProfileGenerator
 
         $button = $this->createHeaderButton();
 
-        echo "<div class='profileHeader'>
+        return "<div class='profileHeader'>
                     <div class='userInfoContainer'>
                         <img src='$profileImage' class='profileImage'>
                         <div class='userInfo'>
@@ -65,7 +65,7 @@ class ProfileGenerator
     }
     public function createTabsSection()
     {
-        echo "<ul class='nav nav-tabs' role='tablist'>
+        return "<ul class='nav nav-tabs' role='tablist'>
                   <li class='nav-item'>
                     <a class='nav-link active' id='videos-tab' data-toggle='tab' 
                     href='#videos' role='tab' aria-controls='videos' aria-selected='true'>VIDEOS</a>
@@ -78,9 +78,16 @@ class ProfileGenerator
     }
     public function createContentSection()
     {
-        echo "<div class='tab-content channelContent'>
+        $videos = $this->profileData->getUserVideos();
+        if (sizeof($videos) > 0){
+            $videoGrid = new VideoGrid($this->conn, $this->userLoggedInObj);
+            $videoGridHtml = $videoGrid->create($videos,null, false);
+        }else{
+            $videoGridHtml = "<span>This user has no videos.</span>";
+        }
+        return "<div class='tab-content channelContent'>
                   <div class='tab-pane fade show active' id='videos' role='tabpanel' aria-labelledby='videos-tab'>
-                    videos tab
+                    $videoGridHtml
                   </div>
                   <div class='tab-pane fade' id='about' role='tabpanel' aria-labelledby='about-tab'>
                     About tab

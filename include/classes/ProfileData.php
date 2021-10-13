@@ -47,4 +47,17 @@ class ProfileData
     {
         return $this->profileUserObj->getSubscriberCount();
     }
+    public function getUserVideos()
+    {
+        $query = $this->conn->prepare("SELECT * FROM videos WHERE uploadBy=:uploadedBy ORDER BY uploadDate DESC");
+        $profileUsername = $this->getProfileUsername();
+        $query->bindParam(":uploadedBy", $profileUsername);
+        $query->execute();
+
+        $videos = array();
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)){
+            $videos[] = new Video($this->conn, $row, $this->profileUserObj->getUserName());
+        }
+        return $videos;
+    }
 }
