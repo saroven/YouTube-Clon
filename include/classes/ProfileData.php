@@ -15,6 +15,11 @@ class ProfileData
         return $this->profileUserObj->getUserName();
     }
 
+    public function getProfileUserObj()
+    {
+        return $this->profileUserObj;
+    }
+
     public function usersExist()
     {
         $query = $this->conn->prepare("SELECT * FROM users WHERE username=:username");
