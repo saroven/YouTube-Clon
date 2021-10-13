@@ -3,6 +3,7 @@ require_once "include/header.php";
 require_once 'include/classes/VideoPlayer.php';
 require_once 'include/classes/VideoDetailsFormProvider.php';
 require_once 'include/classes/VideoUploadData.php';
+require_once 'include/classes/selectThumbnail.php';
 
 if (!User::isLoggedIn()) header("location: signIn.php");
 
@@ -14,3 +15,19 @@ $video = new Video($conn, $_GET['videoId'], $userLoggedInObj);
 if ($video->getUploadedBy() != $userLoggedInObj->getUserName()){
     die("Not your video");
 }
+?>
+
+<div class="editVideoContainer column">
+    <div class="topSection">
+        <?php
+            $videoPlayer = new VideoPlayer($video);
+            echo $videoPlayer->create(false);
+
+            $selectThumbnail = new selectThumbnail($conn,$video);
+            echo $selectThumbnail->create();
+        ?>
+    </div>
+    <div class="bottomSection">
+
+    </div>
+</div>
