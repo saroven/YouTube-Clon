@@ -8,6 +8,13 @@ if (!User::isLoggedIn()){
     header("location: signIn.php");
 }
 $settingsFormProvider = new SettingsFormProvider();
+
+if (isset($_POST['saveDetailsButton'])){
+    $account = new Account($conn);
+    $firstName = FormValidation::sanitizeFormString($_POST['fname']);
+    $lastName = FormValidation::sanitizeFormString($_POST['lname']);
+    $email = FormValidation::sanitizeFormString($_POST['email']);
+}
 ?>
 
 <div class="settingsContainer column">

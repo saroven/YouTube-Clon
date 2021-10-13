@@ -36,6 +36,19 @@ class Account
             return false;
         }
     }
+
+    public function updateDetails($fn, $ln, $em, $un)
+    {
+        $this->validateFirstName($fn);
+        $this->validateLastName($ln);
+        $this->validateNewEmail($em, $un);
+
+        if (empty($this->errors)){
+            //update user detail
+        }else{
+            return false;
+        }
+    }
     public function insertUserData($fn, $ln, $un, $em, $ps){
         $ps = hash('sha512', $ps);
         $pp = 'assets/images/profilePictures/default.png';
@@ -83,6 +96,20 @@ class Account
             return;
         }
         $query = $this->conn->prepare("SELECT * FROM users WHERE email=:em");
+        $query->bindParam(":em", $em);
+        $query->execute();
+        if ($query->rowCount() != 0){
+            array_push($this->errors, Constants::$emailTaken);
+        }
+    }
+    private function validateNewEmail($em, $un)
+    {
+        if (!filter_var($em, FILTER_VALIDATE_EMAIL)) {
+            array_push($this->errors, Constants::$invalidEmail);
+            return;
+        }
+        $query = $this->conn->prepare("SELECT * FROM users WHERE email=:em AND username !=:un");
+        $query->bindParam(":un", $un);
         $query->bindParam(":em", $em);
         $query->execute();
         if ($query->rowCount() != 0){
