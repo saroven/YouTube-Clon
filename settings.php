@@ -12,7 +12,10 @@ $settingsFormProvider = new SettingsFormProvider();
 
 <div class="settingsContainer column">
     <div class="formSection">
-        <?= $settingsFormProvider->createUserDetailsForm(); ?>
+        <?php
+        echo $settingsFormProvider->createUserDetailsForm();
+        echo $settingsFormProvider->createPasswordForm();
+        ?>
     </div>
 </div>
 <?php require_once 'include/footer.php'; ?>
