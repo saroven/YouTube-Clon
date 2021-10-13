@@ -647,3 +647,13 @@ a {
   border-radius: 2px;
   cursor: pointer;
 }
+.profileContainer .channelContent{
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.nav-item a{
+  color: rgba(17,17,17,0.6);
+  font-weight: 400;
+}
