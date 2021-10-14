@@ -15,6 +15,38 @@ $video = new Video($conn, $_GET['videoId'], $userLoggedInObj);
 if ($video->getUploadedBy() != $userLoggedInObj->getUserName()){
     die("Not your video");
 }
+
+if (isset($_POST['save'])){
+    $videUpdateData = new VideoUpdateData(
+            null,
+        $_POST['title'],
+        $_POST['description'],
+        $_POST['privacy'],
+        $_POST['category'],
+        $userLoggedInObj->getUserName()
+    );
+
+    if($videUpdateData->updateDetails($conn, $videoId)){
+        //success
+        $detailsMessage = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                              <strong>SUCCESS!</strong> Details updated successfully!
+                              <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                              </button>
+                            </div>";
+
+    }else{
+        //update failed
+
+        $detailsMessage = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                              <strong>ERROR!</strong> Something Went Wrong!
+                              <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                              </button>
+                            </div>";
+    }
+
+}
 ?>
 
 <div class="editVideoContainer column">

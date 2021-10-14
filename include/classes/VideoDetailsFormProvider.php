@@ -86,6 +86,6 @@
 	        return"<button type='submit' name='upload' class='btn btn-primary mt-3'>Upload</button>";
         }
         private function createSaveButton(){
-	        return"<button type='submit' name='saveButton' class='btn btn-primary mt-3'>Save</button>";
+	        return"<button type='submit' name='save' class='btn btn-primary mt-3'>Save</button>";
         }
 	}

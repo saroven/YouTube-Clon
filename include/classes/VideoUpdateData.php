@@ -1,5 +1,6 @@
 <?php
-class VideoUploadData
+
+class VideoUpdateData
 {
     public $videoDataArray, $title, $description, $privacy, $category, $uploadedBy;
     public function __construct($videoDataArray, $title, $description, $privacy, $category, $uploadBy){
