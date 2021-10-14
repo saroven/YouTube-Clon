@@ -8,10 +8,10 @@
         }
 		public function createUploadForm(){
 			$fileInput = $this->createFileInput();
-			$titeInput = $this->createTitleInput();
-			$description = $this->createDescriptionInput();
-			$privacyInput = $this->createPrivacyInput();
-			$categoriesInput = $this->createCategoryInput();
+			$titeInput = $this->createTitleInput(null);
+			$description = $this->createDescriptionInput(null);
+			$privacyInput = $this->createPrivacyInput(null);
+			$categoriesInput = $this->createCategoryInput(null);
 			$uploadButton = $this->createUploadButton();
 			return "<form action='../../processing.php' method='POST' enctype='multipart/form-data'>
 						$fileInput
@@ -22,31 +22,51 @@
 						$uploadButton
 					</form>";
 		}
+		public function createEditDetailsForm($video){
+			$titleInput = $this->createTitleInput($video->getTitle());
+			$description = $this->createDescriptionInput($video->getDescription());
+			$privacyInput = $this->createPrivacyInput($video->getPrivacy());
+			$categoriesInput = $this->createCategoryInput($video->getCategory());
+			$saveButton = $this->createSaveButton();
+			return "<form method='POST'>
+						$titleInput
+						$description
+						$categoriesInput
+						$privacyInput
+						$saveButton
+					</form>";
+		}
 		private function createFileInput(){
 			return "<div class='mb-3'>
 					  <input class='form-control' name='file' type='file' id='formFile' required>
 					</div>";
 		}
-		private function createTitleInput(){
+		private function createTitleInput($value){
+	            $value ?? $value = "";
 			return "<div class='form-group mb-3'>
-						<input class='form-control' name='title' type='text' placeholder='Title'>
+						<input class='form-control' name='title' value='$value' type='text' placeholder='Title'>
 					</div>";
 		}
-		private function createDescriptionInput(){
+		private function createDescriptionInput($value){
+	        $value ?? $value = "";
 			return "<div class='form-group mb-3'>
-						<textarea class='form-control' rows='3' name='description' placeholder='Description'></textarea>
+						<textarea class='form-control' rows='3' value='$value' name='description' placeholder='Description'>$value</textarea>
 					</div>";
 		}
-		private function createPrivacyInput(){
+		private function createPrivacyInput($value){
+	        $value ?? $value = "";
+	        $privateSelected = ($value == 0) ? "selected='selected'" : "";
+	        $publicSelected = ($value == 1) ? "selected='selected'" : "";
 			return "<div class='form-group mt-3'>
                       <select class='form-control' name='privacy'>
-                          <option value='0'>Private</option>
-                          <option value='1'>Public</option>
+                          <option value='0' $privateSelected>Private</option>
+                          <option value='1' $publicSelected>Public</option>
 					  </select>
 					<div>
 					";
 		}
-		private function createCategoryInput(){
+		private function createCategoryInput($value){
+	        $value ?? $value = "";
 		    $query = $this->conn->prepare("SELECT * FROM categories");
             $query->execute();
             $html = "<div class='form-group mb-3'>
@@ -54,7 +74,8 @@
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $name = $row["name"];
                 $id = $row["id"];
-                $html.="<option value='$id'>$name</option>";
+                $selected = ($id == $value) ? "selected='selected'" : "";
+                $html.="<option $selected value='$id'>$name</option>";
 
             }
             $html .= "</select>
@@ -63,5 +84,8 @@
         }
         private function createUploadButton(){
 	        return"<button type='submit' name='upload' class='btn btn-primary mt-3'>Upload</button>";
+        }
+        private function createSaveButton(){
+	        return"<button type='submit' name='saveButton' class='btn btn-primary mt-3'>Save</button>";
         }
 	}
