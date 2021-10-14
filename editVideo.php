@@ -17,7 +17,7 @@ if ($video->getUploadedBy() != $userLoggedInObj->getUserName()){
 }
 
 if (isset($_POST['save'])){
-    $videUpdateData = new VideoUpdateData(
+    $videUpdateData = new VideoUploadData(
             null,
         $_POST['title'],
         $_POST['description'],
