@@ -705,4 +705,6 @@ a:hover{
   width: 100%;
   cursor: pointer;
 }
-
+.editVideoContainer .bottomSection{
+  display: grid;
+}

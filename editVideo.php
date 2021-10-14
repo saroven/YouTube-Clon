@@ -15,7 +15,7 @@ $video = new Video($conn, $_GET['videoId'], $userLoggedInObj);
 if ($video->getUploadedBy() != $userLoggedInObj->getUserName()){
     die("Not your video");
 }
-
+$detailsMessage = "";
 if (isset($_POST['save'])){
     $videUpdateData = new VideoUploadData(
             null,
@@ -26,7 +26,7 @@ if (isset($_POST['save'])){
         $userLoggedInObj->getUserName()
     );
 
-    if($videUpdateData->updateDetails($conn, $videoId)){
+    if($videUpdateData->updateDetails($conn, $video->getId())){
         //success
         $detailsMessage = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                               <strong>SUCCESS!</strong> Details updated successfully!
@@ -34,6 +34,7 @@ if (isset($_POST['save'])){
                                 <span aria-hidden='true'>&times;</span>
                               </button>
                             </div>";
+        $video = new Video($conn, $_GET['videoId'], $userLoggedInObj);
 
     }else{
         //update failed
@@ -50,6 +51,9 @@ if (isset($_POST['save'])){
 ?>
 
 <div class="editVideoContainer column">
+    <div class="message">
+        <?php echo $detailsMessage;?>
+    </div>
     <div class="topSection">
         <?php
             $videoPlayer = new VideoPlayer($video);
